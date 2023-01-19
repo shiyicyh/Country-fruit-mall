@@ -1,6 +1,6 @@
 <template>
   <view>
-    
+    <text>这里是购物车页面。</text>
   </view>
 </template>
 

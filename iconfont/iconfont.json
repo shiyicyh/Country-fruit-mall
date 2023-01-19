@@ -1,0 +1,65 @@
+{
+  "id": "3867927",
+  "name": "乡村水果",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "6762074",
+      "name": "分类",
+      "font_class": "fenlei",
+      "unicode": "e6aa",
+      "unicode_decimal": 59050
+    },
+    {
+      "icon_id": "6762075",
+      "name": "购物车",
+      "font_class": "gouwuche2",
+      "unicode": "e6ab",
+      "unicode_decimal": 59051
+    },
+    {
+      "icon_id": "6762086",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e6b1",
+      "unicode_decimal": 59057
+    },
+    {
+      "icon_id": "8758485",
+      "name": "分类",
+      "font_class": "fenlei1",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
+      "icon_id": "8758488",
+      "name": "购物车",
+      "font_class": "gouwuche3",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "8758511",
+      "name": "我的",
+      "font_class": "wode1",
+      "unicode": "e6c5",
+      "unicode_decimal": 59077
+    },
+    {
+      "icon_id": "6762285",
+      "name": "首页",
+      "font_class": "shouye3",
+      "unicode": "e6b9",
+      "unicode_decimal": 59065
+    },
+    {
+      "icon_id": "8758504",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e6c3",
+      "unicode_decimal": 59075
+    }
+  ]
+}
