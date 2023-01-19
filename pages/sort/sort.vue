@@ -1,6 +1,6 @@
 <template>
   <view>
-    
+    <text>这里是分类页面。</text>
   </view>
 </template>
 
