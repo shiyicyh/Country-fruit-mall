@@ -3,15 +3,40 @@
 		{
 			"path": "pages/home/home",
 			"style": {
-				"navigationBarTitleText": "果几来啦"
+				// "navigationBarTitleText": "果几来啦"
+			}
+		},
+    {
+    	"path": "pages/sort/sort",
+    	"style": {
+    		"navigationBarTitleText": "分类"
+    	}
+    },{
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车"
+			}
+		},{
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "个人中心"
 			}
 		}
-	],
+],
+"subPackages": [
+  {
+    "root": "subpkg",
+    "pages": [
+      
+    ]
+  }
+],
 	"globalStyle": {//导航条的样式效果
-		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "果几来啦",
-		"navigationBarBackgroundColor": "#c9f89d",
-		"backgroundColor": "#f8e763"
+    "navigationStyle": "custom"
+		// "navigationBarTextStyle": "white",
+		// "navigationBarTitleText": "果几来啦",
+		// "navigationBarBackgroundColor": "#568a46",
+		// "backgroundColor": "#f8e763"
 	},
   "tabBar": {//底部导航
     "selectedColor": "#50b686",

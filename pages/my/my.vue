@@ -1,6 +1,7 @@
 <template>
   <view>
     <text>这里是个人中心页面。</text>
+    <button type="primary" plain="true" @click="testlogin()">登录</button>
   </view>
 </template>
 
@@ -10,7 +11,13 @@
       return {
         
       };
+    },
+    methods:{
+      testlogin(){
+        
+      }
     }
+    
   }
 </script>
 
