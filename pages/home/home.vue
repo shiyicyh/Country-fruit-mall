@@ -16,14 +16,14 @@
     
         <navigator url="/pages/my/my" open-type="switchTab">
           <view class="scroll">
-           <image src="/static/image/scroll.png"></image>
+           <image :src="scroll_1"></image>
            </view>
         </navigator>
     <!-- 商品列表 -->
     <!-- 商品列表开始 -->
     <view class="goods-list">
       <view>
-        <image src="/static/image/scroll2.jpg" class="top-img"></image>
+        <image :src="scroll_2" class="top-img"></image>
       </view>
       <view class="list-main">
         <unicloud-db ref="udb" v-slot:default="{data, loading, error, options}" :options="formData" :collection="collection"
@@ -46,11 +46,11 @@
         						<view class="uni-title">
         							<text class="uni-ellipsis-2">{{ item.name }}</text>
         						</view>
-                    <view class="uni-note uni-ellipsis-1">{{ item.comment_count }}条评论水果月销量 {{ item.month_sell_count }}</view>
-        						<view>
+                    <view>
         							<text class="uni-tag hot-tag">{{ item.goods_tip }}</text>
         							<text v-for="tag in item.tag" :key="tag" class="uni-tag item-tag">{{ tag }}</text>
         						</view>
+                    <view class="uni-note uni-ellipsis-1">{{ item.goods_desc }}</view>
         					</view>
         				</view>
         			</template>
@@ -58,8 +58,8 @@
                 <view class="footer">
                 <view class="shop-price">
                 	<text>¥</text>
-                	<text class="shop-price-text">{{ item.goods_price }}</text>
-                	<text>.69</text>
+                	<text class="shop-price-text">{{getPrice(item.goods_price,1)}}</text>
+                	<text>.{{getPrice(item.goods_price,2)?getPrice(item.goods_price,2):'00'}}</text>
                 </view>
                 <view class="shopcat">
                   <uni-icons custom-prefix="iconfont" type="icon-gouwuche" size="18" color="#fff"></uni-icons>
@@ -81,14 +81,17 @@
   export default {
     data() {
       return {
-        swiperList:[
-          {"image_src":"/static/image/lb1.png"},
-          {"image_src":"/static/image/lb2.png"}
-        ],//轮播图数据列表
+        swiperList:[//轮播图src
+          {"image_src":"https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/9df9f664-2c7e-49d7-85f8-b9d27b960049.png"},
+          {"image_src":"https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/6cd6068c-9f01-4b99-a4dc-d0e845000e23.png"}
+        ],
+        // 条幅地址
+        scroll_1:"https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/0353223b-948c-45f3-bde6-ff9c705c51e1.png",
+        scroll_2:"https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/8a85c50d-353d-4d67-9eb8-12b49a3f405b.jpg",
         // 数据表名
         collection: 'opendb-mall-goods',
         // 查询字段，多个字段用 , 分割
-        field: 'goods_thumb,name,goods_tip,tag,goods_price,comment_count,month_sell_count,shop_name',
+        field: 'goods_thumb,name,goods_tip,tag,goods_price,comment_count,goods_desc',
         formData: {
         	status: 'loading', // 加载状态
         },
@@ -103,7 +106,16 @@
       	if (ended) {
       		this.formData.status = 'noMore'
       	}
+      },
+      // 将价格格式化
+      getPrice(price,x){
+        if(x==1){
+          return price.split('.')[0]
+        }else{
+          return price.split('.')[1]
+        }
       }
+      
     },
     /**
      * 上拉加载回调函数
@@ -230,10 +242,10 @@ page {
 		flex-shrink: 0;
 	}
  .uni-title{
-   margin-bottom: 3px;
+   margin-bottom: 0;
  }
  .uni-note{
-   margin-top: 0;
+   margin-top: 1px;
  }
 	.ellipsis {
 		display: flex;
