@@ -15,5 +15,7 @@
 </script>
 
 <style lang="scss">
-
+page{
+  background-color: #ebebeb;
+}
 </style>
