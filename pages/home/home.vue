@@ -44,7 +44,7 @@
         				<view class="shop">
         					<view>
         						<view class="uni-title">
-        							<text class="uni-ellipsis-2">{{ item.name }}</text>
+        							<text class="uni-ellipsis-2">{{ item.name+' '+item.standard}}</text>
         						</view>
                     <view>
         							<text class="uni-tag hot-tag">{{ item.goods_tip }}</text>
@@ -61,7 +61,7 @@
                 	<text class="shop-price-text">{{getPrice(item.goods_price,1)}}</text>
                 	<text>.{{getPrice(item.goods_price,2)?getPrice(item.goods_price,2):'00'}}</text>
                 </view>
-                <view class="shopcat">
+                <view class="shopcat" >
                   <uni-icons custom-prefix="iconfont" type="icon-gouwuche" size="18" color="#fff"></uni-icons>
                 </view>
                 </view>
@@ -78,6 +78,7 @@
 </template>
 
 <script>
+// import {mapMutations} from 'vuex'
   export default {
     data() {
       return {
@@ -91,7 +92,7 @@
         // 数据表名
         collection: 'opendb-mall-goods',
         // 查询字段，多个字段用 , 分割
-        field: 'goods_thumb,name,goods_tip,tag,goods_price,comment_count,goods_desc',
+        field: 'goods_thumb,name,goods_tip,tag,goods_price,goods_desc,standard,remain_count',
         formData: {
         	status: 'loading', // 加载状态
         },
@@ -102,6 +103,9 @@
       // this.getSwiperList()
     },
     methods:{
+      //把m_cart模块中的addToCart方法映射到当前页面使用
+      // ...mapMutations('m_cart',['addToCart']),
+      
       load(data, ended) {
       	if (ended) {
       		this.formData.status = 'noMore'

@@ -70,5 +70,6 @@
       }
     ]
   },
-	"uniIdRouter": {}
+	"uniIdRouter": {},
+  "lazyCodeLoading": "requiredComponents"
 }
