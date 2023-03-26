@@ -61,7 +61,7 @@
                 	<text class="shop-price-text">{{getPrice(item.goods_price,1)}}</text>
                 	<text>.{{getPrice(item.goods_price,2)?getPrice(item.goods_price,2):'00'}}</text>
                 </view>
-                <view class="shopcat" >
+                <view class="shopcat" @click="cartBt(item)">
                   <uni-icons custom-prefix="iconfont" type="icon-gouwuche" size="18" color="#fff"></uni-icons>
                 </view>
                 </view>
@@ -78,7 +78,7 @@
 </template>
 
 <script>
-// import {mapMutations} from 'vuex'
+import {mapMutations} from 'vuex'
   export default {
     data() {
       return {
@@ -104,7 +104,7 @@
     },
     methods:{
       //把m_cart模块中的addToCart方法映射到当前页面使用
-      // ...mapMutations('m_cart',['addToCart']),
+      ...mapMutations('m_cart',['addToCart']),
       
       load(data, ended) {
       	if (ended) {
@@ -118,6 +118,20 @@
         }else{
           return price.split('.')[1]
         }
+      },
+      //添加购物车按钮
+      cartBt(item){
+        const goods = {
+          goods_id:item._id,
+          goods_name:item.name,
+          goods_price:item.goods_price,
+          goods_desc:item.goods_desc,
+          goods_thumb:item.goods_thumb,
+          goods_remain:item.remain_count,
+          goods_count:1,
+          goods_state:true
+        }
+        this.addToCart(goods)
       }
       
     },
