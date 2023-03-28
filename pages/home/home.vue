@@ -129,7 +129,7 @@ import {mapMutations} from 'vuex'
           goods_thumb:item.goods_thumb,
           goods_remain:item.remain_count,
           goods_count:1,
-          goods_state:true
+          goods_state:true//默认选中
         }
         this.addToCart(goods)
       }
