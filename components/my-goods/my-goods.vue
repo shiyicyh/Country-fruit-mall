@@ -2,15 +2,14 @@
   <view class="goods-item">
     <!-- 商品左侧图片区域 -->
     <view class="goods-item-left">
-      <radio :checked="goods.goods_state" color="#C00000" v-if="showRadio" @click="radioClick"></radio>
+      <radio :checked="goods.goods_state" color="#3ac368" v-if="showRadio" @click="radioClick"></radio>
       <image :src="goods.goods_thumb || defaultPic" class="goods-pic"></image>
     </view>
     <!-- 商品右侧信息区域 -->
     <view class="goods-item-right">
       <!-- 商品标题 -->
-      <view class="goods-name">{{goods.name}}</view>
-      <view class="goods-desc">{{goods.goods_desc}}</view>
-      <view class="goods-standard">{{goods.standard}}</view>
+      <view class="goods-name">{{goods.goods_name}}</view>
+      <view class="goods-standard">{{goods.goods_standard}}</view>
       <view class="goods-info-box">
         <!-- 商品价格 -->
         <view class="goods-price">￥{{goods.goods_price}}</view>
@@ -71,7 +70,7 @@
 <style lang="scss">
   .goods-item {
     // 让 goods-item 项占满整个屏幕的宽度
-    width: 750rpx;
+    width: 100%;
     // 设置盒模型为 border-box
     box-sizing: border-box;
     display: flex;
@@ -85,8 +84,8 @@
       align-items: center;
 
       .goods-pic {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         display: block;
       }
     }
@@ -98,7 +97,11 @@
       justify-content: space-between;
 
       .goods-name {
+        font-size: 15px;
+      }
+      .goods-standard{
         font-size: 13px;
+        color: #9e9e9e;
       }
       .goods-info-box{
         display: flex;

@@ -1,7 +1,6 @@
 <template>
-  
-  <view class="body">
-    
+  <view class="cart-container" v-if="cart.length != 0">
+    <my-address></my-address>
     <view class="main">
       <!-- 商品列表 -->
       <uni-swipe-action>
@@ -12,13 +11,23 @@
         </block>
       </uni-swipe-action>
     </view>
+    <!-- 底部 -->
+    <my-settle></my-settle>
   </view>
+  <!-- 空白购物车区域 -->
+    <view class="empty-cart" v-else>
+      <image src="@/static/image/cart_empty.png" class="empty-img"></image>
+    </view>
 </template>
 
 <script>
-  import { mapState,mapMutations } from 'vuex'
+  import { mapState,mapMutations, } from 'vuex'
+  // 导入自己封装的 mixin 模块
+  import badgeMix from '@/mixins/tabbar-badge.js'
   
   export default {
+    // 将 badgeMix 混入到当前的页面中进行使用
+    mixins: [badgeMix],
     computed:{
       ...mapState('m_cart',['cart']),
     },
@@ -40,6 +49,7 @@
       // 商品的数量发生了变化
       numberChange(goods) {
         this.updateGoodsCount(goods)
+        this.setBadge()
       },
       // 点击了滑动操作按钮
       swipeActionClick(goods) {
@@ -53,5 +63,24 @@
 <style lang="scss">
 page{
   background-color: #ebebeb;
+}
+.cart-container{
+  padding-bottom: 50px;
+}
+.main{
+  border-radius: 10px;
+  background-color: #fff;
+  margin: 7px;
+}
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 150px;
+
+  .empty-img {
+    width: 200px;
+    height: 200px;
+  }
 }
 </style>

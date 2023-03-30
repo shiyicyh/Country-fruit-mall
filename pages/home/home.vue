@@ -79,7 +79,9 @@
 
 <script>
 import {mapMutations} from 'vuex'
+import badgeMix from '@/mixins/tabbar-badge.js'
   export default {
+    mixins: [badgeMix],
     data() {
       return {
         swiperList:[//轮播图src
@@ -121,17 +123,8 @@ import {mapMutations} from 'vuex'
       },
       //添加购物车按钮
       cartBt(item){
-        const goods = {
-          goods_id:item._id,
-          goods_name:item.name,
-          goods_price:item.goods_price,
-          goods_desc:item.goods_desc,
-          goods_thumb:item.goods_thumb,
-          goods_remain:item.remain_count,
-          goods_count:1,
-          goods_state:true//默认选中
-        }
-        this.addToCart(goods)
+        this.addToCart(item)
+        this.setBadge()
       }
       
     },
@@ -217,7 +210,7 @@ page {
 	}
 
 	.shop-price-text {
-		font-size: 16px;
+		font-size: 18px;
 	} 
   .footer{
     display: flex;
@@ -228,23 +221,23 @@ page {
   }
    .shopcat{
      display: inline-block;
-     width: 24px;
-     height: 24px;
-     line-height: 24px;
+     width: 34px;
+     height: 34px;
+     line-height: 34px;
      text-align: center;
-     border-radius: 12px;
-     background-color: #53c78d;
+     border-radius: 17px;
+     background-color: #35ac3b;
      
    }
 	.hot-tag {
-		background: #ff474a;
+		background: #289828;
 		border: none;
 		color: #fff;
     font-size: 24rpx;
 	}
   .item-tag{
-    border-color: #ff474a;
-    color:#ff474a ;
+    border-color: #2ab030;
+    color:#2ab030 ;
     background-color: #fff;
     font-size: 22rpx;
   }
@@ -277,7 +270,7 @@ page {
 	}
 
 	.uni-ellipsis-2 {
-    font-size: 32rpx;
+    font-size: 14px;
     font-weight: 600;
 		overflow: hidden;
 		text-overflow: ellipsis;
