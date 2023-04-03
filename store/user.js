@@ -18,6 +18,8 @@ export default {
     updateAddress(state, address) {
       state.address = address
       this.commit('m_user/saveAddressToStorage')
+      console.log("收货地址")
+      console.log(state.address)
     },
   },
 

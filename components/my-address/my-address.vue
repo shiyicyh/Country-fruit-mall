@@ -6,10 +6,10 @@
       <text v-if="JSON.stringify(address) === '{}'">请添加收货地址</text>
       <!-- 渲染收货信息的盒子 -->
       <view v-else>
-        <view class="row1">广州航海学院红山街道南六宿舍楼下</view>
+        <view class="row1">{{addstr}}</view>
         <view class="row2">
-          <text>十一</text>
-          <text>15768123224</text>
+          <text>{{address.userName}}</text>
+          <text>{{address.telNumber}}</text>
         </view>
       </view>
       

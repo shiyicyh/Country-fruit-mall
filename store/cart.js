@@ -14,9 +14,9 @@ export default {
     addToCart(state,item){
       const goods = {
         goods_id:item._id,
-        goods_name:item.name,
+        name:item.name,
         goods_price:item.goods_price,
-        goods_standard:item.standard,
+        standard:item.standard,
         goods_thumb:item.goods_thumb,
         goods_remain:item.remain_count,
         goods_count:1,

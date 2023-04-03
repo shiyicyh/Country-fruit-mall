@@ -31,7 +31,16 @@
     "root": "subpkg",
     "pages": [
       
-    ]
+    {
+                    "path" : "goods_detail/goods_detail",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
   }
 ],
 	"globalStyle": {//导航条的样式效果

@@ -139,9 +139,8 @@ import badgeMix from '@/mixins/tabbar-badge.js'
 
 <style lang="scss">
 @import '@/common/uni-ui.scss';
-@import "@/static/iconfont.css";
+
  
-  
 swiper{
   height: 423rpx;
   

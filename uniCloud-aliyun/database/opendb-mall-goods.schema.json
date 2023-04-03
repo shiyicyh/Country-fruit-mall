@@ -1,9 +1,9 @@
 {
 	"bsonType": "object",
 	"permission": {
-		"create": false,
-		"delete": false,
-		"read": "doc.is_on_sale == true",
+		"create": true,
+		"delete": true,
+		"read": true,
 		"update": false
 	},
 	"properties": {

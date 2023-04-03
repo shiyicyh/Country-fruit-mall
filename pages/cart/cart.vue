@@ -6,7 +6,7 @@
       <uni-swipe-action>
         <block v-for="(goods) in cart" :key="goods.goods_id">
           <uni-swipe-action-item :right-options="options" @click="swipeActionClick(goods)">
-              <my-goods :goods="goods" :show-radio="true" :show-num="true" @radio-change="radioChange" @num-change="numberChange"></my-goods>
+              <my-goods :goods="goods" :ifcart="true" @radio-change="radioChange" @num-change="numberChange"></my-goods>
           </uni-swipe-action-item>
         </block>
       </uni-swipe-action>
@@ -17,6 +17,7 @@
   <!-- 空白购物车区域 -->
     <view class="empty-cart" v-else>
       <image src="@/static/image/cart_empty.png" class="empty-img"></image>
+      <text class="tip-text">购物车为空</text>
     </view>
 </template>
 
@@ -76,11 +77,20 @@ page{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 150px;
+  justify-content: center;
+  // background-color: #28eb80;
+  height:100vh;
+  // min-height: 450px;
+  // padding-top: 150px;
 
   .empty-img {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    // height: 180px;
+  }
+  .tip-text{
+    font-size: 14px;
+    color: gray;
+    margin-top: 15px;
   }
 }
 </style>
