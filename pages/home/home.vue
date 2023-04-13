@@ -31,7 +31,7 @@
         	<!-- 基于 uni-list 的页面布局 -->
         	<uni-list class="uni-list--waterfall">
         		<!-- to 属性携带参数跳转详情页面，当前只为参考 -->
-        		<uni-list-item :border="false" class="uni-list-item--waterfall" title="自定义商品列表" v-for="item in data" :key="item._id" :to="'/pages/detail/detail?id='+item._id+'&title='+item.name">
+        		<uni-list-item :border="false" class="uni-list-item--waterfall" title="自定义商品列表" v-for="item in data" :key="item._id" :to="'/subpkg/goods_detail/goods_detail?goods_id=' + item._id">
               
         			<!-- 通过header插槽定义列表左侧图片 -->
         			<template v-slot:header>

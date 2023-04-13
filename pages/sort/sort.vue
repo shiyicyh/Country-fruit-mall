@@ -11,7 +11,7 @@
       
       <!-- 右侧的滚动视图区域 -->
       <scroll-view class="right-scroll-view" scroll-y :style="{height: wh + 'px'}">
-        <block v-for="(goods,i) in cateLeve2" :key="i">
+        <block v-for="(goods,i) in cateLeve2" :key="i" >
           <my-goods :goods="goods"></my-goods>
         </block>
           
@@ -23,7 +23,7 @@
 
 <script>
   import badgeMix from '@/mixins/tabbar-badge.js'
-  const db = uniCloud.database();
+  const db = uniCloud.databaseForJQL();
   export default {
     mixins: [badgeMix],
     data() {
@@ -51,7 +51,7 @@
       getCateList() {
       // 获取分类列表
        db.collection('opendb-mall-categories').field('name,_id').get().then((res)=>{
-         this.cateList=res.result.data
+         this.cateList=res.data
          this.getCateLeve2()
 	     }).catch((err)=>{
 	     	console.log(err);
@@ -75,7 +75,7 @@
           .field('goods_thumb,name,goods_price,goods_desc,standard')
       		.get()
       		.then((res)=>{
-            this.cateLeve2=res.result.data
+            this.cateLeve2=res.data
       		}).catch((err)=>{
       			console.log(err);
       	  })

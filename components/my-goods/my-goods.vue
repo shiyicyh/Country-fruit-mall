@@ -3,18 +3,18 @@
     <!-- 商品左侧图片区域 -->
     <view class="goods-item-left">
       <radio :checked="goods.goods_state" color="#3ac368" v-if="ifcart" @click="radioClick"></radio>
-      <image :src="goods.goods_thumb || defaultPic" class="goods-pic"></image>
+      <image :src="goods.goods_thumb || defaultPic" class="goods-pic" @click="gotoDetail(goods._id)"></image>
     </view>
     <!-- 商品右侧信息区域 -->
     <view class="goods-item-right">
       <!-- 商品标题 -->
-      <view class="top">
+      <view class="top" @click="gotoDetail(goods._id)">
         <view class="goods-name">
-           <text>{{goods.name}}</text>
-           <text v-if="!ifcart">{{goods.standard}}</text>
-         </view>
-         <view class="goods-standard">{{ifcart==true?goods.standard:goods.goods_desc}}</view>
-         </view>
+          <text>{{goods.name}}</text>
+          <text v-if="!ifcart">{{goods.standard}}</text>
+        </view>
+        <view class="goods-standard">{{ifcart==true?goods.standard:goods.goods_desc}}</view>
+      </view>
       
       <view class="goods-info-box">
         <!-- 商品价格 -->
@@ -81,7 +81,13 @@ import badgeMix from '@/mixins/tabbar-badge.js'
       cartBt(item){
         this.addToCart(item)
         this.setBadge()
-      }
+      },
+      // 点击跳转到商品详情页面
+      gotoDetail(id) {
+        uni.navigateTo({
+          url: '/subpkg/goods_detail/goods_detail?goods_id=' + id
+        })
+      },
     }
   }
 </script>
