@@ -50,8 +50,10 @@
     methods: {
       getCateList() {
       // 获取分类列表
-       db.collection('opendb-mall-categories').field('name,_id').get().then((res)=>{
-         this.cateList=res.data
+       db.collection('opendb-mall-categories').field('name').get().then((res)=>{
+         this.cateList=[{'name':'爆款推荐'},{'name':'当季新品'},...res.data]
+         // this.cateList=res.data
+         // this.cateList.unshift()
          this.getCateLeve2()
 	     }).catch((err)=>{
 	     	console.log(err);
@@ -67,7 +69,7 @@
         else if(this.active==1){
           where="is_new==true"
         }else{
-          where="category_id=='"+this.cateList[this.active]._id+"'"
+          where="category=='"+this.cateList[this.active].name+"'"
         }
         // 获取二级数据
         db.collection('opendb-mall-goods')

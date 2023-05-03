@@ -1,6 +1,5 @@
 <template>
   <view class="cart-container" v-if="cart.length != 0">
-    <my-address></my-address>
     <view class="main">
       <!-- 商品列表 -->
       <uni-swipe-action>
@@ -22,7 +21,7 @@
 </template>
 
 <script>
-  import { mapState,mapMutations, } from 'vuex'
+  import { mapState,mapMutations} from 'vuex'
   // 导入自己封装的 mixin 模块
   import badgeMix from '@/mixins/tabbar-badge.js'
   

@@ -1,33 +1,20 @@
 {
 	"bsonType": "object",
-	"required": [
-		"name"
-	],
+	"required": ["name"],
 	"permission": {
 		"read": true,
-		"create": false,
-		"update": false,
-		"delete": false
+		"create": true,
+		"update": true,
+		"delete": true
 	},
 	"properties": {
 		"_id": {
 			"description": "存储文档 ID（文章 ID），系统自动生成"
 		},
-		"parent_id": {
-			"bsonType": "string",
-			"description": "父ID，用于多级分类"
-		},
 		"name": {
 			"bsonType": "string",
 			"description": "类别名称",
 			"title": "类别名称",
-			"trim": "both"
-		},
-		"icon": {
-			"bsonType": "string",
-			"description": "类别图标/图片地址",
-			"title": "图标地址",
-			"pattern": "^(http://|https://|/|./|@/)\\S",
 			"trim": "both"
 		},
 		"sort": {
@@ -41,20 +28,10 @@
 			"title": "类别描述",
 			"trim": "both"
 		},
-		"is_hot_show": {
-			"bsonType": "bool",
-			"title": "加入热门显示",
-			"description": "是否热门显示"
-		},
-		"is_index_show": {
-			"bsonType": "bool",
-			"title": "首页显示",
-			"description": "是否首页显示"
-		},
 		"create_date": {
 			"bsonType": "timestamp",
 			"description": "创建时间",
-			"defaultValue": {
+			"forceDefaultValue": {
 				"$env": "now"
 			}
 		}

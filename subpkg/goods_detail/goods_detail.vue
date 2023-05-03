@@ -9,11 +9,9 @@
     <!-- 商品信息区域 -->
     <view class="goods-header-box box">
       <!-- 标题、描述、价格 -->
-      <!-- 商品价格 -->
       <h4>{{goods_info.name}}</h4>
       <view class="desc">{{goods_info.goods_desc}}</view>
-      <view class="price">￥<text>{{goods_info.goods_price}}</text></view>
-      
+      <view class="price">￥<text>{{goods_info.goods_price | toPrice}}</text></view>
     </view>
     
     <view class="goods-info-box box">
@@ -29,14 +27,8 @@
       <view class="detail-text">商品详情</view>
       <image v-for="item in goods_info.goods_introduce_imgs" :src="item" mode="widthFix" class="introduce-img"></image>
     </view>
-    <!-- <rich-text :nodes="goods_info.goods_introduce"></rich-text> -->
     <!-- 商品导航组件 -->
     <view class="goods_nav"> 
-      <!-- fill 控制右侧按钮的样式 -->
-      <!-- options 左侧按钮的配置项 -->
-      <!-- buttonGroup 右侧按钮的配置项 -->
-      <!-- click 左侧按钮的点击事件处理函数 -->
-      <!-- buttonClick 右侧按钮的点击事件处理函数 -->
       <uni-goods-nav :fill="true" :options="options" :buttonGroup="buttonGroup" @click="onClick" @buttonClick="buttonClick" />
     </view>
   </view>

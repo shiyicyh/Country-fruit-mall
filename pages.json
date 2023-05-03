@@ -20,9 +20,14 @@
         "navigationBarTextStyle": "black"
 			}
 		},{
-			"path": "pages/my/my",
+			"path": "pages/ucenter/ucenter",
 			"style": {
 				"navigationBarTitleText": "个人中心"
+			}
+		}, {
+			"path": "pages/ucenter/settings/settings",
+			"style": {
+				"navigationBarTitleText": "设置"
 			}
 		}
 ],
@@ -30,8 +35,7 @@
   {
     "root": "subpkg",
     "pages": [
-      
-    {
+              {
                     "path" : "goods_detail/goods_detail",
                     "style" :                                                                                    
                 {
@@ -39,8 +43,83 @@
                     "enablePullDownRefresh": false
                 }
                 
+              },{
+                    "path" : "confirm_order/confirm_order",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "确认订单",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "user_order/user_order",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "我的订单",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "goods_search/goods_search",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "搜索",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "order_detail/order_detail",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "订单详情",
+                    "enablePullDownRefresh": false
+                }
+                
                 }
             ]
+  },
+  {
+  		"root": "uni_modules/uni-feedback",
+  		"pages": [{
+  			"path": "pages/opendb-feedback/opendb-feedback",
+  			"style": {
+  				"navigationBarTitleText": "意见反馈",
+  				"enablePullDownRefresh": false
+  			}
+  		}]
+  },
+  {
+    "root": "uni_modules/uni-id-pages/pages",
+    "pages": [
+      {
+          "path": "userinfo/deactivate/deactivate",
+          "style": {
+              "navigationBarTitleText": "注销账号"
+          }
+      }
+      ,{
+          "path": "userinfo/userinfo",
+          "style": {
+              "navigationBarTitleText": "个人资料"
+          }
+      }
+      ,{
+          "path": "login/login-withoutpwd",
+          "style": {
+              "navigationBarTitleText": ""
+          }
+      }
+      ,{
+          "path": "common/webview/webview",
+          "style": {
+              "enablePullDownRefresh": false,
+              "navigationBarTitleText": ""
+          }
+      }
+    ]
   }
 ],
 	"globalStyle": {//导航条的样式效果
@@ -72,13 +151,19 @@
         "selectedIconPath": "static/tab_icons/cart1.png"
       },
       {
-        "pagePath": "pages/my/my",
+        "pagePath": "pages/ucenter/ucenter",
         "text": "个人中心",
         "iconPath": "static/tab_icons/my.png",
         "selectedIconPath": "static/tab_icons/my1.png"
       }
     ]
   },
-	"uniIdRouter": {},
+	"uniIdRouter": {
+		"loginPage": "uni_modules/uni-id-pages/pages/login/login-withoutpwd",
+		"needLogin": [
+			"uni_modules/uni-id-pages/pages/userinfo/userinfo"
+		],
+		"resToLogin": true
+	},
   "lazyCodeLoading": "requiredComponents"
 }

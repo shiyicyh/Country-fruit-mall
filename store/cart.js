@@ -11,16 +11,50 @@ export default {
     saveToStorage(state){
       uni.setStorageSync('cart',JSON.stringify(state.cart))
     },
-    addToCart(state,item){
-      const goods = {
-        goods_id:item._id,
-        name:item.name,
-        goods_price:item.goods_price,
-        standard:item.standard,
-        goods_thumb:item.goods_thumb,
-        goods_remain:item.remain_count,
-        goods_count:1,
-        goods_state:true//默认选中
+    resetStatecart(state,data){
+      state.cart=JSON.parse('[]')
+      this.commit('m_cart/saveToStorage')
+    },
+    addToCart(state,items){
+      //判断是否为数组
+      const isarray=Array.isArray(items)
+      if(isarray){
+        for(let i=0;i<items.length;i++){
+          items[i].isarray=isarray
+          this.commit('m_cart/pushCart',items[i])
+        }
+      }else{
+        items.isarray=isarray
+        this.commit('m_cart/pushCart',items)
+      }
+      
+      // 通过commit方法，调用m_cart命名空间下的saveToStorage方法
+      this.commit('m_cart/saveToStorage')
+    },
+    pushCart(state,item){
+      let goods={}
+      if(item.isarray){
+        goods= {
+           goods_id:item.good_id[0]._id,
+           name:item.good_id[0].name,
+           goods_price:item.good_id[0].goods_price,
+           standard:item.good_id[0].standard,
+           goods_thumb:item.good_id[0].goods_thumb,
+           goods_remain:item.good_id[0].remain_count,
+           goods_count:item.good_count,
+           goods_state:item.good_state,
+        }
+      }else{
+        goods = {
+          goods_id:item._id,
+          name:item.name,
+          goods_price:item.goods_price,
+          standard:item.standard,
+          goods_thumb:item.goods_thumb,
+          goods_remain:item.remain_count,
+          goods_count:1,
+          goods_state:true//默认选中
+        }
       }
       //根据商品id查询购物车是否有该商品
       const findResult = state.cart.find((x) => x.goods_id ===goods.goods_id)
@@ -30,9 +64,6 @@ export default {
       }else{
         findResult.goods_count++
       }
-      
-      // 通过commit方法，调用m_cart命名空间下的saveToStorage方法
-      this.commit('m_cart/saveToStorage')
     },
     updateGoodsState(state,goods){
       // 根据goods_id查询购物车中对应商品的信息对象
@@ -59,8 +90,7 @@ export default {
           // 持久化存储到本地
           this.commit('m_cart/saveToStorage')
         }
-        
-        
+
       }
     },
     // 根据 Id 从购物车中删除对应的商品信息
@@ -83,6 +113,8 @@ export default {
     total(state){
       let c=0
       // 循坏统计商品的数量，累加到变量c中
+      console.log("当前购物车")
+      console.log(state.cart)
       state.cart.forEach(goods => c+= goods.goods_count)
       return c
     },
@@ -99,9 +131,8 @@ export default {
       // 再使用 reduce 方法，将已勾选的商品数量 * 单价之后，进行累加
       // reduce() 的返回值就是已勾选的商品的总价
       // 最后调用 toFixed(2) 方法，保留两位小数
-      return state.cart.filter(x => x.goods_state)
-                       .reduce((total, item) => total += item.goods_count * item.goods_price, 0)
-                       .toFixed(2)
+      let val=state.cart.filter(x => x.goods_state).reduce((total, item) => total += item.goods_count * item.goods_price, 0)
+      return val
     },
   },
 }

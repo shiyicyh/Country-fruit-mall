@@ -1,5 +1,7 @@
 <template>
   <view>
+    <!-- 搜索栏 -->
+    <uni-search-bar v-model="good_search" class="good-search" v-bind:style="{ top: searchStyle.top, right: searchStyle.right}" :class="{ 'focus-search': isfocus }" radius="20" :placeholder="good_search" clearButton="auto" cancelButton="none" @confirm="search()" @focus="this.isfocus=true" @blur="this.isfocus=false" bgColor="#ffffff"/>
     <!-- 轮播图区域 -->
     <swiper indicator-dots="true" indicator-active-color="#1830b8" autoplay="true" interval="3000" duration="1000" circular="true">
       <swiper-item v-for="(item,i) in swiperList" :key="i">
@@ -10,8 +12,8 @@
     </swiper>
     <!-- 轮播图区域结束 -->
     <!-- 公告栏区域 -->
-    <uni-notice-bar show-icon scrollable color="#26ff26" background-color="#e7ffe5" 
-    		text="uni-app 版正式发布，开发一次，同时发布iOS、Android、H5、微信小程序、支付宝小程序、百度小程序、头条小程序等7大平台。" />
+    <uni-notice-bar show-icon scrollable color="#fff" background-color="#54a564" 
+    		text="配送服务升级!全场单件包邮免运费!品质保障、好吃不贵,新鲜美味送到家~" />
     <!-- 横幅区域 -->
     
         <navigator url="/pages/my/my" open-type="switchTab">
@@ -30,7 +32,7 @@
          :field="field" @load="load">
         	<!-- 基于 uni-list 的页面布局 -->
         	<uni-list class="uni-list--waterfall">
-        		<!-- to 属性携带参数跳转详情页面，当前只为参考 -->
+        		<!-- to 属性携带参数跳转详情页面-->
         		<uni-list-item :border="false" class="uni-list-item--waterfall" title="自定义商品列表" v-for="item in data" :key="item._id" :to="'/subpkg/goods_detail/goods_detail?goods_id=' + item._id">
               
         			<!-- 通过header插槽定义列表左侧图片 -->
@@ -61,7 +63,7 @@
                 	<text class="shop-price-text">{{getPrice(item.goods_price,1)}}</text>
                 	<text>.{{getPrice(item.goods_price,2)?getPrice(item.goods_price,2):'00'}}</text>
                 </view>
-                <view class="shopcat" @click="cartBt(item)">
+                <view class="shopcat" @click.stop="cartBt(item)">
                   <uni-icons custom-prefix="iconfont" type="icon-gouwuche" size="18" color="#fff"></uni-icons>
                 </view>
                 </view>
@@ -98,23 +100,50 @@ import badgeMix from '@/mixins/tabbar-badge.js'
         formData: {
         	status: 'loading', // 加载状态
         },
-        tipShow: false // 是否显示顶部提示框
+        tipShow: false ,// 是否显示顶部提示框
+        good_search:'鲜榴莲来啦~',
+        isfocus:false,//搜索框是否获得焦点
+        searchStyle:{
+          top:'24px',
+          right:'100px'
+        }
+        // search_top:0,
+        // search_right:100,//搜索框距离边界距离
       };
     },
     onLoad(){//小程序页面刚加载时
-      // this.getSwiperList()
+      //获取胶囊信息
+      let menuButtonObject = wx.getMenuButtonBoundingClientRect();
+      this.searchStyle.top=menuButtonObject.top + 'px';
+      //获取系统信息
+      wx.getSystemInfo({
+        success:res => {
+          this.searchStyle.right=(res.screenWidth - menuButtonObject.left) + 'px'
+        }
+      })
+    },
+    onShow() {
+      console.log("首页显示")
     },
     methods:{
       //把m_cart模块中的addToCart方法映射到当前页面使用
       ...mapMutations('m_cart',['addToCart']),
-      
+      focusSearch(){
+        this.isfocus=true
+      },
+      search(res){
+        uni.navigateTo({
+          url: '/subpkg/goods_search/goods_search?search='+res.value
+        })
+      },
       load(data, ended) {
       	if (ended) {
       		this.formData.status = 'noMore'
       	}
       },
       // 将价格格式化
-      getPrice(price,x){
+      getPrice(p,x){
+        let price=(p/100).toFixed(2)
         if(x==1){
           return price.split('.')[0]
         }else{
@@ -125,6 +154,11 @@ import badgeMix from '@/mixins/tabbar-badge.js'
       cartBt(item){
         this.addToCart(item)
         this.setBadge()
+        uni.showToast({
+        	title: '已加入购物车',
+        	duration: 1000,
+          icon:'none'
+        });
       }
       
     },
@@ -140,7 +174,24 @@ import badgeMix from '@/mixins/tabbar-badge.js'
 <style lang="scss">
 @import '@/common/uni-ui.scss';
 
- 
+ .good-search{
+   position: fixed;
+   top: 0px;
+   left: 0;
+   right: 0px;
+   z-index: 5;
+   opacity: 0.7;
+   .uni-searchbar{
+     padding: 0 10px;
+     .uni-searchbar__box{
+       height: 32px;
+       
+     }
+   }
+ }
+ .focus-search{
+   opacity: 1;
+ }
 swiper{
   height: 423rpx;
   
@@ -292,7 +343,7 @@ page {
 				flex-wrap: wrap;
 				padding: 0 3px;
 				box-sizing: border-box;
-        background-color: #007AFF;
+        background-color: #efefef;
 				 
 				/* #ifdef H5 || APP-VUE */
 				// h5 和 app-vue 使用深度选择器，因为默认使用了 scoped ，所以样式会无法穿透
@@ -301,11 +352,15 @@ page {
 				  .uni-list-item--waterfall {
 					width: 50%;
 					box-sizing: border-box;
+          background-color: #fff;
 					.uni-list-item__container {
 						display: flex;
+            height: 302px;
+            box-sizing: border-box;
 						padding: 5px;
             padding-bottom: 0;
 						flex-direction: column;
+            justify-content: space-between;
 					} 
 					
 				}

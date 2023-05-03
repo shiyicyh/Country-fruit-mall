@@ -1,7 +1,8 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 3867927 */
-  src: url('@/static/iconfont.ttf') format('truetype');
+	font-family: "iconfont"; 
+	src: url('/static/iconfont.ttf') format('truetype');
 }
+
 
 .iconfont {
   font-family: "iconfont" !important;
@@ -11,7 +12,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-yiquxiao:before {
+  content: "\e72b";
+}
+
+.icon-pinglun:before {
+  content: "\e891";
+}
+
 .icon-gouwuche:before {
   content: "\e899";
+}
+
+.icon-dingdandaifukuan:before {
+  content: "\e896";
+}
+
+.icon-dingdan:before {
+  content: "\e897";
+}
+
+.icon-bujifapiao:before {
+  content: "\e8c9";
 }
 

@@ -1,0 +1,21 @@
+{
+  "passwordSecret": "sudfihkjsajhdgweuyhioenwiewwesd",
+  "tokenSecret": "ewjudiunwdvtefhidsjicbdwo",
+  "tokenExpiresIn": 7200,
+  "tokenExpiresThreshold": 600,
+  "passwordErrorLimit": 6,
+  "bindTokenToDevice": false,
+  "passwordErrorRetryTime": 3600,
+  "autoSetInviteCode": false,
+  "forceInviteCode": false,
+  "preferedAppPlatform": "weixin",
+  "mp-weixin": {
+    "oauth": {
+      "weixin": {
+        "appid": "wxb06de2148e38be76",
+        "appsecret": "ea202945868bbe4c0a82044c71a1fcdc"
+      }
+    }
+  }
+  
+}
