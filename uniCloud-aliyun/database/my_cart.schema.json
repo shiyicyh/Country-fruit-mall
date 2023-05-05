@@ -1,0 +1,38 @@
+{
+	"bsonType": "object",
+	"required": ["good_count", "good_state", "user_id", "good_id"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"good_count": {
+			"title": "商品购买数量",
+			"bsonType": "int",
+			"defaultValue": 1
+		},
+		"good_state": {
+			"title": "商品选中状态",
+			"bsonType": "bool",
+			"defaultValue": true
+		},
+		"user_id": {
+			"title": "用户_id",
+			"bsonType": "string",
+			"foreignKey": "uni-id-users._id",
+			"forceDefaultValue": {
+				"$env": "uid"
+			}
+		},
+		"good_id": {
+			"title": "商品_id",
+			"bsonType": "string",
+			"foreignKey": "opendb-mall-goods._id"
+		}
+	}
+}

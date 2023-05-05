@@ -1,47 +1,62 @@
 {
 	"bsonType": "object",
 	"permission": {
-		"create": false,
-		"delete": false,
-		"read": "doc.is_on_sale == true",
+		"create": true,
+		"delete": true,
+		"read": true,
 		"update": false
 	},
 	"properties": {
 		"_id": {
-			"description": "存储文档 ID（商品 ID），系统自动生成"
+			"description": "存储文档 ID（商品 ID），系统自动生成",
+			"title": "商品编号"
 		},
-		"add_date": {
-			"bsonType": "timestamp",
-			"defaultValue": {
-				"$env": "now"
-			},
-			"description": "上架时间"
-		},
-		"category_id": {
+		"name": {
 			"bsonType": "string",
-			"description": "分类 id，参考`opendb-mall-categories`表"
+			"description": "商品名称",
+			"title": "名称",
+			"trim": "both",
+			"maxLength": 15
 		},
-		"comment_count": {
+		"remain_count": {
 			"bsonType": "int",
-			"description": "累计评论数"
-		},
-		"goods_banner_imgs": {
-			"bsonType": "array",
-			"description": "商品详情页的banner图地址"
-		},
-		"goods_desc": {
-			"bsonType": "string",
-			"description": "商品详细描述",
-			"title": "详细描述"
+			"description": "库存数量",
+			"title": "库存数量",
+			"defaultValue": 999
 		},
 		"goods_price": {
 			"bsonType": "int",
-			"description": "商品价格"
+			"description": "商品价格",
+			"title": "价格"
 		},
-		"goods_sn": {
+		"goods_desc": {
 			"bsonType": "string",
-			"description": "商品的唯一货号",
-			"title": "货号"
+			"description": "商品简短描述",
+			"title": "商品简介",
+			"trim": "both",
+			"maxLength": 15
+		},
+		"standard": {
+			"bsonType": "string",
+			"description": "商品规格",
+			"title": "商品规格",
+			"trim": "both",
+			"maxLength": 15
+		},
+		"category": {
+			"bsonType": "string",
+			"description": "",
+			"title": "商品类别"
+		},
+		"goods_swiper_imgs": {
+			"bsonType": "array",
+			"description": "商品详情页的轮播图地址",
+			"title": "详情轮播图"
+		},
+		"goods_introduce_imgs": {
+			"bsonType": "array",
+			"description": "商品详情页的介绍图地址",
+			"title": "详情介绍图"
 		},
 		"goods_thumb": {
 			"bsonType": "string",
@@ -49,21 +64,10 @@
 			"pattern": "^(http:\/\/|https:\/\/|\/|.\/|@\/)\\S",
 			"title": "缩略图地址"
 		},
-		"goods_tip": {
-			"bsonType": "string",
-			"description": "店铺标签"
-		},
-		"is_alone_sale": {
-			"bsonType": "bool",
-			"description": "是否能单独销售；如果不能单独销售，则只能作为某商品的配件或者赠品销售"
-		},
-		"is_best": {
-			"bsonType": "bool",
-			"description": "是否精品"
-		},
 		"is_hot": {
 			"bsonType": "bool",
-			"description": "是否热销"
+			"description": "是否热销",
+			"title": "是否热销"
 		},
 		"is_new": {
 			"bsonType": "bool",
@@ -73,60 +77,41 @@
 		"is_on_sale": {
 			"bsonType": "bool",
 			"description": "是否上架销售",
-			"title": "是否上架"
+			"title": "是否上架",
+			"defaultValue": true
 		},
-		"is_real": {
-			"bsonType": "bool",
-			"description": "是否实物",
-			"title": "是否为实物"
+		"tag": {
+			"bsonType": "array",
+			"description": "商品标签"
 		},
-		"keywords": {
-			"bsonType": "string",
-			"description": "商品关键字，为搜索引擎收录使用",
-			"title": "关键字"
+		"comment_count": {
+			"bsonType": "int",
+			"description": "评论数",
+			"title": "评论数",
+			"defaultValue": 0
+		},
+		"total_sell_count": {
+			"bsonType": "int",
+			"description": "销量",
+			"title": "销量",
+			"defaultValue": 0
+		},
+		"add_date": {
+			"bsonType": "timestamp",
+			"forceDefaultValue": {
+				"$env": "now"
+			},
+			"description": "商品创建时间",
+			"title": "创建时间"
 		},
 		"last_modify_date": {
 			"bsonType": "timestamp",
 			"defaultValue": {
 				"$env": "now"
 			},
-			"description": "最后修改时间"
-		},
-		"month_sell_count": {
-			"bsonType": "int",
-			"description": "月销量"
-		},
-		"name": {
-			"bsonType": "string",
-			"description": "商品名称",
-			"title": "名称"
-		},
-		"remain_count": {
-			"bsonType": "int",
-			"description": "库存数量",
-			"title": "库存数量"
-		},
-		"seller_note": {
-			"bsonType": "string",
-			"description": "商家备注，仅商家可见",
-			"permission": {
-				"read": false
-			}
-		},
-		"shop_name": {
-			"bsonType": "string",
-			"description": "店铺名"
-		},
-		"tag": {
-			"bsonType": "array",
-			"description": "商品标签"
-		},
-		"total_sell_count": {
-			"bsonType": "int",
-			"description": "总销量"
+			"description": "最后修改时间",
+			"title": "最后修改时间"
 		}
 	},
-	"required": ["goods_sn", "name", "remain_count", "month_sell_count", "total_sell_count", "comment_count", "is_real",
-		"is_on_sale", "is_alone_sale", "is_best", "is_new", "is_hot"
-	]
+	"required": ["name", "goods_price", "standard", "goods_thumb", "goods_introduce_imgs", "goods_swiper_imgs"]
 }

@@ -1,0 +1,162 @@
+{
+	"bsonType": "object",
+	"required": ["status", "total_fee", "user_address.addstr", "user_address.userName", "user_address.telNumber"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"title": "订单编号",
+			"description": "ID，系统自动生成"
+		},
+		"buy_goods": {
+			"title": "购买的商品",
+			"bsonType": "array"
+		},
+		"user_address": {
+			"title": "收货信息",
+			"bsonType": "object",
+			"properties": {
+				"addstr": {
+					"bsonType": "string",
+					"title": "收货地址"
+				},
+				"userName": {
+					"bsonType": "string",
+					"title": "收件人昵称"
+				},
+				"telNumber": {
+					"bsonType": "int",
+					"title": "收件人号码"
+				}
+			}
+		},
+		"status": {
+			"title": "订单状态",
+			"bsonType": "int",
+			"enum": [{
+				"text": "用户删除",
+				"value": -2
+			}, {
+				"text": "已取消",
+				"value": -1
+			}, {
+				"text": "待支付",
+				"value": 0
+			}, {
+				"text": "待发货",
+				"value": 1
+			}, {
+				"text": "待收货",
+				"value": 2
+			}, {
+				"text": "待评价",
+				"value": 3
+			}, {
+				"text": "已完成",
+				"value": 4
+			}],
+			"description": "",
+			"defaultValue": 0
+		},
+		"transaction_id": {
+			"title": "交易单号",
+			"bsonType": "string",
+			"description": "交易单号（支付平台订单号，由支付平台控制唯一）",
+			"trim": "both"
+		},
+		"expressInfo": {
+			"bsonType": "object",
+			"title": "快递信息",
+			"properties": {
+				"name": {
+					"bsonType": "string",
+					"title": "快递公司名称"
+				},
+				"ID": {
+					"bsonType": "string",
+					"title": "快递单号"
+				}
+			}
+		},
+		"user_id": {
+			"title": "用户ID",
+			"bsonType": "string",
+			"description": "用户id，参考uni-id-users表",
+			"foreignKey": "uni-id-users._id",
+			"forceDefaultValue": {
+				"$env": "uid"
+			}
+		},
+		"total_count": {
+			"title": "订单总件数",
+			"bsonType": "int",
+			"description": "订单总件数"
+		},
+		"total_fee": {
+			"title": "订单总金额",
+			"bsonType": "int",
+			"description": "订单总金额"
+		},
+		"user_order_success": {
+			"title": "回调状态",
+			"bsonType": "bool",
+			"description": "用户异步通知逻辑是否全部执行完成，且无异常（建议前端通过此参数是否为true来判断是否支付成功）"
+		},
+		"original_data": {
+			"title": "异步通知原始数据",
+			"bsonType": "object",
+			"description": "异步回调通知返回的原始数据，微信v2是xml转json后的数据，微信v3和支付宝是原始json"
+		},
+		"create_date": {
+			"title": "创建时间",
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		},
+		"pay_date": {
+			"title": "支付时间",
+			"bsonType": "timestamp",
+			"description": "支付时间"
+		},
+		"notify_date": {
+			"title": "异步通知时间",
+			"bsonType": "timestamp",
+			"description": "订单通知支付成功时间"
+		},
+		"cancel_date": {
+			"title": "取消时间",
+			"bsonType": "timestamp",
+			"description": "订单取消时间"
+		},
+		"deliver_date": {
+			"title": "发货时间",
+			"bsonType": "timestamp",
+			"description": "订单发货时间"
+		},
+		"receive_date": {
+			"title": "成交时间",
+			"bsonType": "timestamp",
+			"description": "订单确认收货时间"
+		},
+		"last_modify_date": {
+			"bsonType": "timestamp",
+			"defaultValue": {
+				"$env": "now"
+			},
+			"description": "最后修改时间",
+			"title": "最后修改时间"
+		},
+		"operater": {
+			"bsonType": "string",
+			"title": "操作员",
+			"description": "操作员",
+			"foreignKey": "uni-id-users._id"
+		}
+	}
+}
