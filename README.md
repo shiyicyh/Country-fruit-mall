@@ -25,6 +25,6 @@
 
 ### 使用教程：
 
-1.注册自己的微信小程序并获取appid和secret
-2.全文件搜索“#appid#”和“#secret#”，将appid和secret替换到相应位置
-3.注册自己的uniCloud服务，并创建关联一个阿里云服务空间
+1.注册自己的微信小程序并获取appid和secret  
+2.全文件搜索“#appid#”和“#secret#”，将appid和secret替换到相应位置  
+3.注册自己的uniCloud服务，并创建关联一个阿里云服务空间  
