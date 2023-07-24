@@ -22,9 +22,3 @@
 ![img](https://github.com/shiyicyh/Country-fruit-mall/blob/main/readmeImg/wps6.jpg)
 ![img](https://github.com/shiyicyh/Country-fruit-mall/blob/main/readmeImg/1690188176170.png)
 ![img](https://github.com/shiyicyh/Country-fruit-mall/blob/main/readmeImg/wps8.jpg)
-
-![1690188176170](C:\Users\月华\AppData\Roaming\Typora\typora-user-images\1690188176170.png)
-
-
-
-![img](file:///C:\Users\月华\AppData\Local\Temp\ksohtml12836\wps8.jpg)
