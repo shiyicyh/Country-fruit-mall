@@ -10,8 +10,7 @@
 收货评价等功能；管理端主要实现产品管理、评论管理、订单管理、分类管理等功能。
 
 这里主要介绍小程序端，小程序功能结构图如下所示。
-
-![1690187665906](C:\Users\月华\AppData\Roaming\Typora\typora-user-images\1690187665906.png)
+![Uploading image.png…]()
 
 ### 系统截图：
 
