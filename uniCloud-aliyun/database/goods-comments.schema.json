@@ -1,0 +1,95 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": "doc.user_id == auth.uid"
+	},
+	"properties": {
+		"_id": {
+			"description": "存储文档 ID（文章 ID），系统自动生成"
+		},
+		"good_id": {
+			"bsonType": "string",
+			"description": "被评价的商品id",
+			"foreignKey": "opendb-mall-goods._id",
+			"title": "商品id"
+		},
+		"user_id": {
+			"bsonType": "string",
+			"title": "评论者ID",
+			"forceDefaultValue": {
+				"$env": "uid"
+			},
+			"foreignKey": "uni-id-users._id"
+		},
+		"user_name": {
+			"bsonType": "string",
+			"title": "评论者昵称"
+		},
+		"comment_content": {
+			"bsonType": "string",
+			"description": "评论内容",
+			"title": "评论内容",
+			"trim": "right"
+		},
+		"comment_img": {
+			"bsonType": "array",
+			"description": "评论图片",
+			"title": "评论图片"
+		},
+		"rate_count": {
+			"bsonType": "int",
+			"title": "评分（5分制）"
+		},
+		"status": {
+			"title": "评价状态",
+			"bsonType": "int",
+			"enum": [{
+				"text": "用户删除",
+				"value": -2
+			}, {
+				"text": "审核未通过",
+				"value": -1
+			}, {
+				"text": "待审核",
+				"value": 0
+			}, {
+				"text": "审核通过",
+				"value": 1
+			}],
+			"description": "",
+			"defaultValue": 0
+		},
+		"warn": {
+			"title": "审核未通过原因",
+			"bsonType": "string",
+			"enum": [{
+				"text": "涉及政治违规",
+				"value": "涉及政治违规"
+			}, {
+				"text": "低俗违规",
+				"value": "低俗违规"
+			}, {
+				"text": "广告导流",
+				"value": "广告导流"
+			}],
+			"description": ""
+		},
+		"operater": {
+			"bsonType": "string",
+			"title": "最后操作员",
+			"description": "操作员",
+			"foreignKey": "uni-id-users._id"
+		},
+		"comment_date": {
+			"bsonType": "timestamp",
+			"description": "评论发表时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	}
+}

@@ -3,7 +3,7 @@
     <!-- 商品左侧图片区域 -->
     <view class="goods-item-left">
       <radio :checked="goods.goods_state" color="#3ac368" v-if="ifcart" @click="radioClick"></radio>
-      <image :src="goods.goods_thumb || defaultPic" class="goods-pic" :style="{width:imgsize+'px',height:imgsize+'px'}" @click="gotoDetail(goods._id)"></image>
+      <image :src="goods.goods_thumb || defaultPic" class="goods-pic" :style="{width:imgsize+'px',height:imgsize+'px'}" @click="gotoDetail(goods._id)" mode="aspectFill"></image>
     </view>
     <!-- 商品右侧信息区域 -->
     <view class="goods-item-right">

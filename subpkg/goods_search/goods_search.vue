@@ -30,7 +30,7 @@
         db.collection('opendb-mall-goods')
         // 
         // "name=='"+this.good_search+"'"
-        	.where(`${new RegExp(this.good_search, 'i')}.test(name)`)
+        	.where(`${new RegExp(this.good_search, 'i')}.test(name)`+"&& is_on_sale==true")
           .field("goods_thumb,name,goods_price,goods_desc,standard")
         	.get()
         	.then((res)=>{

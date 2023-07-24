@@ -1,10 +1,10 @@
 <template>
   <view class="my-order-button">
-    <view class="order-button" v-if="status==3 || status==4" @click="orderButton(-2)">删除订单</view>
+    <view class="order-button" v-if="status==3 || status==4 || status==-1" @click="orderButton(-2)">删除订单</view>
     <view class="order-button" v-if="status==0 || status==1" @click="orderButton(-1)">取消订单</view>
-    <view class="order-button" v-if="status==0" @click="orderButton(0)">去支付</view>
+    <view class="order-button" v-if="status==0" @click="orderButton(1)">支付订单</view>
     <view class="order-button" v-else-if="status==2" @click="orderButton(3)">确认收货</view>
-    <view class="order-button" v-else-if="status==3" @click="orderButton(4)">去评价</view>
+    <view class="order-button" v-else-if="status==3" @click="this.$emit('goto','comment')">去评价</view>
   </view>
 </template>
 

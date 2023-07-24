@@ -15,9 +15,9 @@
     },{
 			"path": "pages/cart/cart",
 			"style": {
-				"navigationBarTitleText": "购物车",
-        "navigationBarBackgroundColor": "#FFF",
-        "navigationBarTextStyle": "black"
+				"navigationBarTitleText": "购物车"
+        // "navigationBarBackgroundColor": "#FFF",
+        // "navigationBarTextStyle": "black"
 			}
 		},{
 			"path": "pages/ucenter/ucenter",
@@ -75,6 +75,24 @@
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "订单详情",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "goods_comment/goods_comment",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "发表评价",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "comment-list/comment-list",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "评论列表",
                     "enablePullDownRefresh": false
                 }
                 

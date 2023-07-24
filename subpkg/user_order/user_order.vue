@@ -1,9 +1,13 @@
 <template>
   <view class="user-order">
     <uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" styleType="text" activeColor="#2e843c" class="segmented"></uni-segmented-control>
+    <view class="comment" @click="gotoMycomment()" v-if="current==4">
+      <text>我的评价</text>
+      <uni-icons type="forward" size="23"></uni-icons>
+    </view>
     <view class="content">
       <block v-for="(order) in orders" :key="order._id">
-        <my-order :order="order"></my-order>
+        <my-order :order="order" @refer="getOrder()"></my-order>
       </block>
     </view>
   </view>
@@ -22,8 +26,10 @@
     onLoad: function (option) {//参数传递
       // 获取商品 Id
       this.current = ++option.status
-      this.getOrder()
       // 调用请求商品详情数据的方法
+    },
+    onShow() {
+      this.getOrder()
     },
     methods:{
       onClickItem(e) {
@@ -43,6 +49,7 @@
         
         db.collection('uni-pay-orders')
         .where(where)
+        .orderBy("create_date desc")
         .get()
         .then((res)=>{
           console.log("获取订单信息")
@@ -51,7 +58,12 @@
         }).catch((err)=>{
         	console.log(err);
         })
-      }
+      },
+      gotoMycomment(){
+        uni.navigateTo({
+          url: '/subpkg/comment-list/comment-list?ifmy=true' 
+        })
+      },
     }
   }
 </script>
@@ -62,6 +74,16 @@
     min-height: 100vh;
     padding-top: 36px;
     padding-bottom: 10px;
+    .comment{
+      background-color: #fff;
+      display: flex;
+      padding:15px;
+      margin: 7px;
+      margin-bottom: 0;
+      border-radius: 10px;
+      justify-content: space-between;
+      align-items: center;
+    }
       .segmented{
         position: fixed;
         top: 0px;

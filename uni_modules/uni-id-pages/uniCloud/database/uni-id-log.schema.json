@@ -30,15 +30,7 @@
 		"type": {
 			"bsonType": "string",
 			"description": "操作类型",
-			"enum": [
-				"logout",
-				"login",
-				"register",
-				"reset-pwd",
-				"bind-mobile",
-				"bind-weixin",
-				"bind-qq",
-				"bind-apple",
+			"enum": ["logout", "login", "register", "reset-pwd", "bind-mobile", "bind-weixin", "bind-qq", "bind-apple",
 				"bind-alipay"
 			]
 		},

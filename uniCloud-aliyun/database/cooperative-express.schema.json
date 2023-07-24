@@ -1,0 +1,49 @@
+{
+	"bsonType": "object",
+	"required": ["name"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"name": {
+			"bsonType": "string",
+			"description": "快递公司名称",
+			"label": "快递名称",
+			"componentForEdit": {
+				"name": "uni-easyinput"
+			}
+		},
+		"manager": {
+			"bsonType": "Number",
+			"description": "联系人电话",
+			"label": "联系人电话",
+			"componentForEdit": {
+				"name": "uni-easyinput"
+			}
+		},
+		"address": {
+			"bsonType": "string",
+			"description": "快递站点地址",
+			"label": "站点地址",
+			"componentForEdit": {
+				"name": "uni-easyinput"
+			}
+		},
+		"create_date": {
+			"bsonType": "timestamp",
+			"label": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			},
+			"componentForEdit": {
+				"name": "uni-dateformat"
+			}
+		}
+	}
+}

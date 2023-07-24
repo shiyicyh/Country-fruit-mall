@@ -12,6 +12,38 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-weizhifu:before {
+  content: "\e600";
+}
+
+.icon-peisongzhong:before {
+  content: "\e601";
+}
+
+.icon-yitongguo:before {
+  content: "\e602";
+}
+
+.icon-daifahuo:before {
+  content: "\e603";
+}
+
+.icon-yiwancheng:before {
+  content: "\e604";
+}
+
+.icon-yiquxiao1:before {
+  content: "\e605";
+}
+
+.icon-weitongguo:before {
+  content: "\e606";
+}
+
+.icon-shenhezhong:before {
+  content: "\e607";
+}
+
 .icon-yiquxiao:before {
   content: "\e72b";
 }
