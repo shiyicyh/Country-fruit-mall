@@ -84,7 +84,17 @@ export default {
       if(findResult) {
         if(goods.goods_count === 0){
           this.commit('m_cart/removeGoodsById',goods.goods_id)
-        }else{
+        }
+        else if(goods.goods_count > goods.remain_count){
+          findResult.goods_count = goods.remain_count
+          // 持久化存储到本地
+          this.commit('m_cart/saveToStorage')
+          uni.showToast({
+            title:"库存不足",
+            icon:"error"
+          })
+        }
+        else{
           // 更新对应商品的数量
           findResult.goods_count = goods.goods_count
           // 持久化存储到本地

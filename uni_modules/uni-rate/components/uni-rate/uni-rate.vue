@@ -73,6 +73,11 @@
 				type: [Number, String],
 				default: 24
 			},
+      index: {
+      	// 数组下标
+      	type: Number,
+      	default: 0
+      },
 			value: {
 				// 当前评分
 				type: [Number, String],
@@ -294,7 +299,8 @@
 				this.$emit("input", this.valueSync);
 				this.$emit("update:modelValue", this.valueSync);
 				this.$emit("change", {
-					value: this.valueSync
+					value: this.valueSync,
+          index:this.index
 				});
 			},
 			/**

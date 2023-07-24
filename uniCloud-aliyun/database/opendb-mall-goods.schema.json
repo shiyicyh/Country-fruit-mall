@@ -4,7 +4,7 @@
 		"create": true,
 		"delete": true,
 		"read": true,
-		"update": false
+		"update": true
 	},
 	"properties": {
 		"_id": {
@@ -111,6 +111,12 @@
 			},
 			"description": "最后修改时间",
 			"title": "最后修改时间"
+		},
+		"operater": {
+			"bsonType": "string",
+			"title": "操作员",
+			"description": "操作员",
+			"foreignKey": "uni-id-users._id"
 		}
 	},
 	"required": ["name", "goods_price", "standard", "goods_thumb", "goods_introduce_imgs", "goods_swiper_imgs"]

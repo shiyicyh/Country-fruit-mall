@@ -16,8 +16,10 @@
     </view>
 		<uni-grid class="grid" :column="4" :showBorder="false" :square="true">
 			<uni-grid-item class="item" v-for="(item,index) in gridList" @click.native="tapGrid(index)" :key="index">
-				<uni-icons class="icon" color="#00ac02" custom-prefix="iconfont" :type="item.icon" size="24"></uni-icons>
-				<text class="text">{{item.text}}</text>
+        <uni-badge class="uni-badge-left-margin" :text="item.badge" absolute="rightTop" size="small">
+				  <uni-icons class="icon" color="#00ac02" custom-prefix="iconfont" :type="item.icon" size="24"></uni-icons>
+				  <text class="text">{{item.text}}</text>
+        </uni-badge>
 			</uni-grid-item>
 		</uni-grid>
 		<uni-list class="center-list" v-for="(sublist , index) in ucenterList" :key="index">
@@ -29,7 +31,7 @@
 </template>
 
 <script>
-	const db = uniCloud.database();
+	const db = uniCloud.databaseForJQL();
 	import {
 		store,
 		mutations
@@ -41,19 +43,23 @@
 			return {
 				gridList: [{
 						"text": "待支付",
-						"icon": "icon-dingdandaifukuan"
+						"icon": "icon-dingdandaifukuan",
+            "badge":null
 					},
 					{
 						"text": "待发货",
-						"icon": "icon-bujifapiao"
+						"icon": "icon-bujifapiao",
+            "badge":null
 					},
 					{
 						"text": "待收货",
-						"icon": "icon-pinglun"
+						"icon": "icon-pinglun",
+            "badge":null
 					},
 					{
 						"text": "待评价",
-						"icon": "icon-dingdan"
+						"icon": "icon-dingdan",
+            "badge":null
 					}
 				],
 				ucenterList: [
@@ -91,9 +97,14 @@
          uni.removeStorageSync('uni_id_token');
          uni.setStorageSync('uni_id_token_expired', 0)
          mutations.setUserInfo({},{cover:true})
-        // mutations.updateUserInfo({})
-        // mutations.updateToken('')
-        // this.updateAddress({})
+      }
+      if(this.hasLogin){
+        this.getbadge()
+      }else{
+        for(let i=0;i<4;i++){
+          this.gridList[i].badge=null
+        }
+        
       }
 		},
 		computed: {
@@ -118,6 +129,23 @@
 					this[item.event]();
 				}
 			},
+      async getbadge(){
+        await db.collection('uni-pay-orders')
+        .where("status != -2 && user_id ==$cloudEnv_uid")
+        .get()
+        .then((res)=>{
+          console.log("获取订单信息")
+          console.log(res)
+          this.gridList[0].badge=res.data.filter(x => x.status==0).length
+          this.gridList[1].badge=res.data.filter(x => x.status==1).length
+          this.gridList[2].badge=res.data.filter(x => x.status==2).length
+          this.gridList[3].badge=res.data.filter(x => x.status==3).length
+          console.log("获取信息")
+          console.log(this.gridList)
+        }).catch((err)=>{
+        	console.log(err);
+        })
+      },
 			toUserInfo() {
 				uni.navigateTo({
 					url: '/uni_modules/uni-id-pages/pages/userinfo/userinfo'
@@ -306,5 +334,12 @@
   .uni-grid-item{
     height: 18.66vw !important;
     /* // align-items: center; */
+  }
+  .uni-badge--x {
+    display: flex !important;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 </style>

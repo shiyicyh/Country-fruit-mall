@@ -5,7 +5,7 @@
         <view>{{statusList[status].name}}</view>
         <view class="status-desc">{{statusList[status].desc}}</view>
       </view>
-      <image :src="statusList[status].src"></image>
+      <i class="iconfont" :class="statusList[status].icon"></i>
     </view>
     <view class="info-item" v-if="order.status > 1">
       <text>{{order.expressInfo.name}}</text>
@@ -27,7 +27,7 @@
     <view class="box">
       <view class="info-item">
         <text>商品总金额</text>
-        <text>{{order.total_fee | toPrice}}</text>
+        <text>￥{{order.total_fee | toPrice}}</text>
       </view>
       <view class="info-item">
         <text>配送费</text>
@@ -65,12 +65,13 @@
       </view>
     </view>
     <view class="bottom-button">
-      <my-order-button :status="order.status" @orderButton="orderOperation()"></my-order-button>
+      <my-order-button :status="order.status" @orderButton="orderOperation()" @goto="gotoPage()"></my-order-button>
     </view>
   </view>
 </template>
 
 <script>
+  const db = uniCloud.database();
   export default {
     data() {
       return {
@@ -78,27 +79,27 @@
           {
             "name":'已取消',
             "desc":'订单已取消',
-            "src":'https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/06b6eab2-abaa-4cee-99f8-6aebf96288d3.png'
+            "icon":'icon-yiquxiao1'
           },{
             "name":'待支付',
-            "desc":'',
-            "src":'https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/06b6eab2-abaa-4cee-99f8-6aebf96288d3.png'
+            "desc":'请尽快支付',
+            "icon":'icon-weizhifu'
           },{
             "name":'待发货',
             "desc":'商品准备中',
-            "src":'https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/06b6eab2-abaa-4cee-99f8-6aebf96288d3.png'
+            "icon":'icon-daifahuo'
           },{
             "name":'待收货',
-            "desc":'',
-            "src":'https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/06b6eab2-abaa-4cee-99f8-6aebf96288d3.png'
+            "desc":'商品正在配送中',
+            "icon":'icon-peisongzhong'
           },{
             "name":'已完成 ',
             "desc":'期待下次为您服务',
-            "src":'https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/06b6eab2-abaa-4cee-99f8-6aebf96288d3.png'
+            "icon":'icon-yiwancheng'
           },{
             "name":'已完成 ',
             "desc":'期待下次为您服务',
-            "src":'https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/06b6eab2-abaa-4cee-99f8-6aebf96288d3.png'
+            "icon":'icon-yiwancheng'
           }
         ],
         order:{},
@@ -106,9 +107,6 @@
       };
     },
     onShow() {
-      console.log("获取全局变量")
-      console.log(getApp().globalData.order_detail)
-      console.log(getApp().globalData.order_goods)
       this.order=getApp().globalData.order_detail
       this.goods=getApp().globalData.order_goods
     },
@@ -128,6 +126,11 @@
       			console.log(err);
       	  })
       },
+      gotoPage(){
+        uni.navigateTo({
+          url: '/subpkg/goods_comment/goods_comment'
+        })
+      }
     }
   }
 </script>
@@ -150,7 +153,7 @@
     align-items: center;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 5.33vw;
+    padding: 7px 5.33vw;
     background: linear-gradient(90deg, #71bf86 0%, #ffffff 100%);
     .status{
       text-align: left;
@@ -159,6 +162,9 @@
       .status-desc{
         font-size: 14px;
       }
+    }
+    .iconfont{
+      font-size: 60px;
     }
     image{
       width: 60px;

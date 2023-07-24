@@ -1,12 +1,12 @@
 <template>
-  <view>
+  <view class="home">
     <!-- 搜索栏 -->
     <uni-search-bar v-model="good_search" class="good-search" v-bind:style="{ top: searchStyle.top, right: searchStyle.right}" :class="{ 'focus-search': isfocus }" radius="20" :placeholder="good_search" clearButton="auto" cancelButton="none" @confirm="search()" @focus="this.isfocus=true" @blur="this.isfocus=false" bgColor="#ffffff"/>
     <!-- 轮播图区域 -->
     <swiper indicator-dots="true" indicator-active-color="#1830b8" autoplay="true" interval="3000" duration="1000" circular="true">
       <swiper-item v-for="(item,i) in swiperList" :key="i">
         <view class="swiper-item">
-          <image :src="item.image_src"></image>
+          <image :src="item.image_src" mode="aspectFill"></image>
         </view>
       </swiper-item>
     </swiper>
@@ -18,7 +18,7 @@
     
         <navigator url="/pages/my/my" open-type="switchTab">
           <view class="scroll">
-           <image :src="scroll_1"></image>
+           <image :src="scroll_1" mode="widthFix"></image>
            </view>
         </navigator>
     <!-- 商品列表 -->
@@ -29,7 +29,7 @@
       </view>
       <view class="list-main">
         <unicloud-db ref="udb" v-slot:default="{data, loading, error, options}" :options="formData" :collection="collection"
-         :field="field" @load="load">
+         :field="field" where="is_on_sale==true" orderby="last_modify_date desc" @load="load">
         	<!-- 基于 uni-list 的页面布局 -->
         	<uni-list class="uni-list--waterfall">
         		<!-- to 属性携带参数跳转详情页面-->
@@ -49,8 +49,9 @@
         							<text class="uni-ellipsis-2">{{ item.name+' '+item.standard}}</text>
         						</view>
                     <view>
-        							<text class="uni-tag hot-tag">{{ item.goods_tip }}</text>
-        							<text v-for="tag in item.tag" :key="tag" class="uni-tag item-tag">{{ tag }}</text>
+                      <text class="uni-tag hot-tag" v-if="item.is_hot">爆款</text>
+                      <text class="uni-tag hot-tag" v-if="item.is_new">新品</text>
+        							<text class="uni-tag item-tag">坏果包赔</text>
         						</view>
                     <view class="uni-note uni-ellipsis-1">{{ item.goods_desc }}</view>
         					</view>
@@ -87,16 +88,17 @@ import badgeMix from '@/mixins/tabbar-badge.js'
     data() {
       return {
         swiperList:[//轮播图src
-          {"image_src":"https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/9df9f664-2c7e-49d7-85f8-b9d27b960049.png"},
-          {"image_src":"https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/6cd6068c-9f01-4b99-a4dc-d0e845000e23.png"}
+          {"image_src":"https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/b6f990be-a0e8-43b8-b552-241c93422881.webp"},
+          {"image_src":"https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/deba0061-dbda-4acb-9c58-c6a40e981a5d.png"},
+          {"image_src":"https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/da257031-8612-4366-a714-5092ef2713b2.png"}
         ],
         // 条幅地址
-        scroll_1:"https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/0353223b-948c-45f3-bde6-ff9c705c51e1.png",
+        scroll_1:"https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/40677583-5e9d-4f16-b415-65be52c4bd8b.png",
         scroll_2:"https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/8a85c50d-353d-4d67-9eb8-12b49a3f405b.jpg",
         // 数据表名
         collection: 'opendb-mall-goods',
         // 查询字段，多个字段用 , 分割
-        field: 'goods_thumb,name,goods_tip,tag,goods_price,goods_desc,standard,remain_count',
+        field: 'goods_thumb,name,goods_price,goods_desc,standard,remain_count,is_hot,is_new',
         formData: {
         	status: 'loading', // 加载状态
         },
@@ -173,7 +175,9 @@ import badgeMix from '@/mixins/tabbar-badge.js'
 
 <style lang="scss">
 @import '@/common/uni-ui.scss';
-
+.home{
+  background-color: #fff;
+}
  .good-search{
    position: fixed;
    top: 0px;
@@ -193,7 +197,7 @@ import badgeMix from '@/mixins/tabbar-badge.js'
    opacity: 1;
  }
 swiper{
-  height: 423rpx;
+  height: 523rpx;
   
   .swiper-item,
   image{
@@ -202,12 +206,12 @@ swiper{
   }
 }
 .scroll{
-  height: 287rpx;
-  padding: 10rpx;
+  // height: 27rpx;
+  // padding: 10rpx;
   image{
     width: 100%;
-    height: 100%;
-    border-radius: 10px;
+    // height: 100%;
+    border-radius: 20px;
   }
 }
 .goods-list{

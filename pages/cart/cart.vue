@@ -15,7 +15,7 @@
   </view>
   <!-- 空白购物车区域 -->
     <view class="empty-cart" v-else>
-      <image src="@/static/image/cart_empty.png" class="empty-img"></image>
+      <image :src="cart_empty_img" class="empty-img"></image>
       <text class="tip-text">购物车为空</text>
     </view>
 </template>
@@ -39,6 +39,7 @@
             backgroundColor: '#C00000' // 按钮的背景颜色
           }
         }],
+        cart_empty_img:'https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/82b413f8-1e0b-49d2-9220-1f151eb4a859.png'
       }
     },
     methods:{
@@ -54,6 +55,7 @@
       // 点击了滑动操作按钮
       swipeActionClick(goods) {
         this.removeGoodsById(goods.goods_id)
+        this.setBadge()
       },
       
     },

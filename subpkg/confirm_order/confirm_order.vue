@@ -3,8 +3,8 @@
     <my-address></my-address>
     <view class="div">
       <view class="title">
-        <image src="../../static/image/logo.png"  class="logo"></image>
-        <image src="../../static/image/text.png"  class="text"></image>
+        <image :src="logourl"  class="logo"></image>
+        <image :src="texturl"  class="text"></image>
       </view>
       <view>
         <block v-for="(goods) in cart" :key="goods.goods_id">
@@ -57,7 +57,8 @@
     },
     data() {
       return {
-        
+        logourl:'https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/ceb61727-8b7b-4deb-8a9e-833838fd2cc8.png',
+        texturl:'https://mp-630f25f8-3d11-4a15-8e06-595c473b679e.cdn.bspapp.com/cloudstorage/b762412d-3839-45c5-8895-55401191d45f.png'
       };
     },
     methods:{
@@ -78,7 +79,7 @@
         console.log("取消了支付")
       },
       // 添加订单
-      addOrder(status){
+      async addOrder(status){
         // 整理购买商品信息
         let buygoods=this.$store.state.m_cart.cart.filter(x => x.goods_state)
         buygoods = buygoods.map(function(item,index){
@@ -98,7 +99,6 @@
           total_fee:parseInt(this.checkedGoodsAmount),
           pay_date:status==1?Date.now():null
         }
-        console.log(orderinfo)
         db.collection('uni-pay-orders').add(orderinfo).then( res =>{
           db.collection('uni-pay-orders')
           .where('_id=="'+res.result.id+'"')
@@ -120,6 +120,19 @@
           	console.log(err);
           })
         })
+        if(status==1){//确认支付则减去商品对应库存
+            for(let i=0;i<buygoods.length;i++){
+              //访问云对象空间
+              const incGood = uniCloud.importObject('inc-goods')
+              //调用云对象方法
+              try {
+              	const res = await incGood.updateGood(buygoods[i].good_id,buygoods[i].buynum)
+              } catch (e) {
+              	console.log(e.errCode)
+              	console.log(e.errMsg)
+              }
+            }
+        }
       }
     },
   }

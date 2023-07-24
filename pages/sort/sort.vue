@@ -50,7 +50,7 @@
     methods: {
       getCateList() {
       // 获取分类列表
-       db.collection('opendb-mall-categories').field('name').get().then((res)=>{
+       db.collection('opendb-mall-categories').field('name').orderBy('sort asc').get().then((res)=>{
          this.cateList=[{'name':'爆款推荐'},{'name':'当季新品'},...res.data]
          // this.cateList=res.data
          // this.cateList.unshift()
@@ -73,7 +73,7 @@
         }
         // 获取二级数据
         db.collection('opendb-mall-goods')
-      		.where(where)
+      		.where(where+"&& is_on_sale==true")
           .field('goods_thumb,name,goods_price,goods_desc,standard')
       		.get()
       		.then((res)=>{

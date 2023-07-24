@@ -161,6 +161,7 @@ export default {
 	props: {
 		name: String,
 		value: [Number, String],
+    index:Number,
 		modelValue: [Number, String],
 		type: {
 			type: String,
@@ -426,7 +427,7 @@ export default {
 			this.$emit('blur', event);
 			// 根据类型返回值，在event中获取的值理论上讲都是string
 			if (this.isEnter === false) {
-				this.$emit('change', this.val);
+				this.$emit('change', {val:this.val,index:this.index});
 			}
 			// 失去焦点时参与表单校验
 			if (this.form && this.formItem) {
@@ -444,7 +445,7 @@ export default {
 		onConfirm(e) {
 			this.$emit('confirm', this.val);
 			this.isEnter = true;
-			this.$emit('change', this.val);
+			this.$emit('change', {val:this.val,index:this.index});
 			this.$nextTick(() => {
 				this.isEnter = false;
 			});
